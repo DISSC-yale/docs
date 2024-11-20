@@ -1,0 +1,154 @@
+# yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
+# Project Information
+site_name: Circle1 - Docs
+site_description: Docs for Circle1
+site_author: DISSC
+# docs_dir: docs
+# site_dir: site
+site_url: https://DISSC.github.io/docs-for-reseachers
+
+# Repository
+repo_name: docs
+repo_url: https://github.com/DISSC-yale/docs-for-researchers
+edit_uri:  edit/main/docs/
+#dev_addr: 0.0.0.0:4040
+
+# Important for correct viewing offline
+use_directory_urls: false
+
+
+
+theme:
+  palette:
+    - scheme: slate
+      primary: blue grey
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+    # Palette toggle for dark mode
+    - scheme: default
+      primary: blue grey
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  font:
+    text: Roboto Serif
+    code: Roboto Mono
+  logo: assets/DISSC wordmark package/png/DISSC_ol_white.png
+  name: material
+  icon:
+    edit: material/pencil
+    view: material/eye
+
+  # Don't include MkDocs' JavaScript
+  include_search_page: false
+  search_index_only: true
+  # Default values, taken from mkdocs_theme.yml
+  language: en
+  features:
+    - navigation.sections
+    - content.action.edit
+    - navigation.instant
+    - navigation.tabs
+    - navigation.top
+    - navigation.tabs.stick
+    - navigation.indexes
+    - content.code.copy
+    - navigation.footer
+
+
+
+copyright: <a href="https://dissc.yale.edu/">&#10140; Data Intensive Social Science Center</a>
+
+
+extra:
+  social:
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/company/data-intensive-social-science-center-dissc-at-yale-university?trk=public_post-text
+      name: DISSC
+
+# Plugins
+plugins:
+  - drawio
+  - search:
+      lang:
+        - en
+  - minify:
+     minify_html: true
+  - git-revision-date-localized:
+     type: datetime
+  - glightbox:
+       touchNavigation: true
+       loop: false
+       effect: zoom
+       slide_effect: slide
+       width: 200%
+       height: auto
+       zoomable: true
+       draggable: true
+       skip_classes:
+         - custom-skip-class-name
+       auto_caption: false
+       caption_position: bottom
+       background: white
+       shadow: true
+       manual: false
+extra_javascript:
+    - assets/js/helpers.js
+    - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+    - https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js
+extra_css:
+    - assets/stylesheets/extra.css
+    - https://unpkg.com/mermaid@7.1.2/dist/mermaid.css
+    - https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css
+
+
+# These extensions are chosen to be a superset of Pandocs Markdown.
+# This way, I can write in Pandocs Markdown and have it be supported here.
+# https://pandoc.org/MANUAL.html
+markdown_extensions:
+    - admonition
+    - attr_list
+    - codehilite:
+        guess_lang: false
+    - def_list
+    - footnotes
+    - pymdownx.arithmatex
+    - pymdownx.betterem
+    - pymdownx.caret:
+        insert: false
+    - pymdownx.details
+    - pymdownx.emoji
+    - pymdownx.escapeall:
+        hardbreak: true
+        nbsp: true
+    - pymdownx.magiclink:
+        hide_protocol: true
+        repo_url_shortener: true
+    - pymdownx.smartsymbols:
+    - pymdownx.superfences:
+        custom_fences:
+          - name: mermaid
+            class: mermaid
+            format: !!python/name:pymdownx.superfences.fence_div_format
+    - pymdownx.tasklist:
+        custom_checkbox: true
+    - pymdownx.tilde
+    - toc:
+         permalink: true
+    - attr_list
+    - md_in_html
+
+
+nav:
+  - Working with large data:
+      - overview: tooling/index.md
+      - Columna data formats: tooling/using_data_formats.md
+      - Working with parquet efficiently: tooling/lazy_compute.md
+  - Code and data providence:
+      - overview: onboarding/index.md
+      - Git Basics: tooling/using_git.md
+      - Using GitHub: onboarding/connecting_to_git.md
+      - DVC basics: tooling/dvc_basics.md
+      - Using DVC: onboarding/using_dvc.md
