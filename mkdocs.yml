@@ -1,15 +1,15 @@
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
 # Project Information
-site_name: Circle1 - Docs
+site_name: DISSC-docs 
 site_description: Docs for Circle1
 site_author: DISSC
 # docs_dir: docs
 # site_dir: site
-site_url: https://DISSC.github.io/docs-for-reseachers
+site_url: https://DISSC.github.io/docs
 
 # Repository
 repo_name: docs
-repo_url: https://github.com/DISSC-yale/docs-for-researchers
+repo_url: https://github.com/DISSC-yale/docs
 edit_uri:  edit/main/docs/
 #dev_addr: 0.0.0.0:4040
 
@@ -143,12 +143,4 @@ markdown_extensions:
 
 nav:
   - Working with large data:
-      - overview: tooling/index.md
-      - Columna data formats: tooling/using_data_formats.md
-      - Working with parquet efficiently: tooling/lazy_compute.md
-  - Code and data providence:
-      - overview: onboarding/index.md
-      - Git Basics: tooling/using_git.md
-      - Using GitHub: onboarding/connecting_to_git.md
-      - DVC basics: tooling/dvc_basics.md
-      - Using DVC: onboarding/using_dvc.md
+      - overview: index.md
