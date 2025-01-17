@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
 # Project Information
-site_name: DISSC-docs 
-site_description: Docs for Circle1
+site_name: docs 
+site_description: Docs 
 site_author: DISSC
 # docs_dir: docs
 # site_dir: site
@@ -142,5 +142,5 @@ markdown_extensions:
 
 
 nav:
-  - Working with large data:
+  - Doc:
       - overview: index.md
