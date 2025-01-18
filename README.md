@@ -1,5 +1,6 @@
-# doc_circle1-onboard
-Static website for onboarding people to circle1
+# DISSC docs
+
+Website to put general docs for applied research.
 
 ## Desktop gifs
 
