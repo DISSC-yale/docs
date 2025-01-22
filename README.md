@@ -2,19 +2,27 @@
 
 Website to put general docs for applied research.
 
+## Preview
+
+To preview the site, serve it locally:
+
+```sh
+mkdocs serve
+```
+
 ## Desktop gifs
 
-Created on a mac which creates a mov file 
+Created on a mac which creates a mov file
 
-then install 
+then install
 
-``` sh
+```sh
 brew install ffmpeg
 brew install gifsicle
 ```
 
-then i convert with 
+then i convert with
 
-`ffmpeg -i in.mov -pix_fmt rgb8 -r 10 output.gif && gifsicle -O3 output.gif -o output.gif`
-
-`
+```sh
+ffmpeg -i in.mov -pix_fmt rgb8 -r 10 output.gif && gifsicle -O3 output.gif -o output.gif
+```

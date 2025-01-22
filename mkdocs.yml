@@ -1,22 +1,17 @@
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
 # Project Information
-site_name: docs 
-site_description: Docs 
+site_name: Documentation
+site_description: Data-Intensive Social Science Center Documentation
 site_author: DISSC
-# docs_dir: docs
-# site_dir: site
 site_url: https://DISSC.github.io/docs
 
 # Repository
 repo_name: docs
 repo_url: https://github.com/DISSC-yale/docs
-edit_uri:  edit/main/docs/
-#dev_addr: 0.0.0.0:4040
+edit_uri: edit/main/docs/
 
 # Important for correct viewing offline
 use_directory_urls: false
-
-
 
 theme:
   palette:
@@ -41,106 +36,87 @@ theme:
     edit: material/pencil
     view: material/eye
 
-  # Don't include MkDocs' JavaScript
-  include_search_page: false
-  search_index_only: true
   # Default values, taken from mkdocs_theme.yml
   language: en
   features:
-    - navigation.sections
     - content.action.edit
     - navigation.instant
-    - navigation.tabs
-    - navigation.top
-    - navigation.tabs.stick
-    - navigation.indexes
     - content.code.copy
-    - navigation.footer
-
-
-
-copyright: <a href="https://dissc.yale.edu/">&#10140; Data Intensive Social Science Center</a>
-
 
 extra:
   social:
+    - icon: material/home-circle
+      link: https://dissc.yale.edu
+      name: DISSC home page
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/company/data-intensive-social-science-center-dissc-at-yale-university?trk=public_post-text
-      name: DISSC
+      name: LinkedIn
 
 # Plugins
 plugins:
-  - drawio
   - search:
       lang:
         - en
   - minify:
-     minify_html: true
+      minify_html: true
   - git-revision-date-localized:
-     type: datetime
+      type: datetime
   - glightbox:
-       touchNavigation: true
-       loop: false
-       effect: zoom
-       slide_effect: slide
-       width: 200%
-       height: auto
-       zoomable: true
-       draggable: true
-       skip_classes:
-         - custom-skip-class-name
-       auto_caption: false
-       caption_position: bottom
-       background: white
-       shadow: true
-       manual: false
-extra_javascript:
-    - assets/js/helpers.js
-    - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML
-    - https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js
-extra_css:
-    - assets/stylesheets/extra.css
-    - https://unpkg.com/mermaid@7.1.2/dist/mermaid.css
-    - https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css
-
+      touchNavigation: true
+      loop: false
+      effect: zoom
+      slide_effect: slide
+      width: 200%
+      height: auto
+      zoomable: true
+      draggable: true
+      skip_classes:
+        - custom-skip-class-name
+      auto_caption: false
+      caption_position: bottom
+      background: white
+      shadow: true
+      manual: false
 
 # These extensions are chosen to be a superset of Pandocs Markdown.
 # This way, I can write in Pandocs Markdown and have it be supported here.
 # https://pandoc.org/MANUAL.html
 markdown_extensions:
-    - admonition
-    - attr_list
-    - codehilite:
-        guess_lang: false
-    - def_list
-    - footnotes
-    - pymdownx.arithmatex
-    - pymdownx.betterem
-    - pymdownx.caret:
-        insert: false
-    - pymdownx.details
-    - pymdownx.emoji
-    - pymdownx.escapeall:
-        hardbreak: true
-        nbsp: true
-    - pymdownx.magiclink:
-        hide_protocol: true
-        repo_url_shortener: true
-    - pymdownx.smartsymbols:
-    - pymdownx.superfences:
-        custom_fences:
-          - name: mermaid
-            class: mermaid
-            format: !!python/name:pymdownx.superfences.fence_div_format
-    - pymdownx.tasklist:
-        custom_checkbox: true
-    - pymdownx.tilde
-    - toc:
-         permalink: true
-    - attr_list
-    - md_in_html
-
+  - admonition
+  - attr_list
+  - codehilite:
+      guess_lang: false
+  - def_list
+  - footnotes
+  - pymdownx.arithmatex
+  - pymdownx.betterem
+  - pymdownx.caret:
+      insert: false
+  - pymdownx.details
+  - pymdownx.emoji
+  - pymdownx.escapeall:
+      hardbreak: true
+      nbsp: true
+  - pymdownx.magiclink:
+      hide_protocol: true
+      repo_url_shortener: true
+  - pymdownx.smartsymbols:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - toc:
+      permalink: true
+  - md_in_html
 
 nav:
-  - Doc:
-      - overview: index.md
+  - Version Control:
+      - using_git.md
+      - connecting_to_git.md
+      - using_dvc.md
+      - dvc_basics.md
+  - High-Performance Computing:
+      - hpc/ood.md
