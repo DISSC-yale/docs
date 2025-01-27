@@ -114,6 +114,7 @@ markdown_extensions:
 
 nav:
   - Version Control:
+      - accesing_yale_github_enterprise.md
       - using_git.md
       - connecting_to_git.md
       - using_dvc.md
