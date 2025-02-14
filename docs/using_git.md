@@ -1,200 +1,330 @@
+# Git walkthrough
 
-# Version control 
-- *SOLVES FOR* -> what did I do? Need to go back to last version? 
-- *REQUIRES A* -> different way to work 
 
-*Key ideas*
+It might be useful to read over the general [git section under tooling](../../tooling/using_git.html) 
+before reading through but its not necessary. 
 
-- Research is incremental
+Ensure that you have access to the access to GitHub repository. Request access if you do not have it. 
 
-- Coding is incremental 
 
-- Version controls (git) allows you to focus on incremental changes 
+After completing this section you will have: 
 
-- allows for better orchestration around code 
+1. Set up your computer to communicate with GitHub
 
-# Why Git? 
+2. Completed a sample pull request and created an issue from a demo_project repository
 
-Git is a distributed version control system, it is extremely flexible and widely used. Created by the Linux Kernal developer. Learning git is a transferable skill that builds efficiencies whenever you work with code. 
 
-Starting to use git requires a slightly different way of working, that may feel like it is adding an administrative burden to you project (why am I commiting this?). The workflow encourages better coding practices as it often forces you to stop and think about the changes you just made and why you made them. 
+## Connecting to GitHub 
 
-Every time you record a change to the repository, known as a 'commit', git take all of the files in your repository and uses them to create a Hash to sign the changes. Having these hashes and knowing what version of paper or presentation came from a hash allows us to link code to the research. 
+Connection to GitHub cloud server is via a sshkey authentication. This means that you
+create a public private ssh key locally and you share your public key pair with GitHub 
+which uses a one-way crytographic hash function to authenticate the pair. 
 
-## Whats the difference between git and GitHub 
+### Local Git installation 
 
-`git` is version control software that underpins all of the actions on your machines  or on servers you connect to. There are providers that make front ends that make it easier to follow changes made to the code,e.g. GitHub/Gitlab. 
-These services often run on the cloud and ingest `git` changes and present them in easier to view webpages. 
+We need a local git installation to use it and to interact with GitHub which is basically a git cloud hosted service with a nice front end. 
 
-In addition GitHub has other features such as issues, pull requests and in line commenting around code that makes collaborating or tracking incremental changes to code much eaiser. GitHub/GitLab 
-is also a standard in software development and being at least exposed to it will allow you to interactive with the open data science community and be better positioned to understanding different software packages available. 
+#### Installing 
+
+##### Windows
+
+You have two options, one is to [install linux on windows](https://learn.microsoft.com/en-us/windows/wsl/install) and follow Linux/Mac commands 
+or you can install a command line emulator as documented below. 
+
+If you decide to use a bash emulator, [see this handy Atlassian tutorial for more info](https://www.atlassian.com/git/tutorials/git-bash)
+   
+   1. Download and install from [gitforwindow.org](https://gitforwindows.org/)
+   
+   2. You will be asked about many features, at a minimum you need to install git but there other features that might be worthwhile exploring.
+
+#####  Linux/ Mac
+
+  1. Open command line and type  `git --version` to see if it installed, make sure its the most recent 
+  
+  2. can be installed via package managers like `apt-get` for Ubuntu or `homebrew` for mac 
+
+#### Configuring 
+
+Users need to set the default email address and name used for git using 
+
+```bash 
+git config --global user.name "First Last"
+git config --global user.email "first.last@yale.edu"
+```
+Note that the email should match the email on your github account. 
+
+
+### Connecting to GitHub 
+
+Authentication happens via [ssh keys](https://en.wikipedia.org/wiki/Public-key_cryptography).  
+These are created via the command line and used as a way for third-party's to authenticate with your computer. 
+We use and create these to communicate with GitHub. 
+
+Given that we installed git-bash on Windows, the process of creating ssh-keys is the same in all environments and 
+involves typing a couple of commands into the terminal. The process creates a ssh-key pair. 
  
-# Using Git 
+  - a public key ,e.g. `id_rsa.pub` with the `pub` stub 
+  - a private key, e.g. `id_rsa` which should never be shared
+  
+  We will share the public key with gitHub. Note a nice overview is [found here](https://www.atlassian.com/git/tutorials/git-ssh)
+  
+  
+### Create ssh keys locally
+  
+  Open a terminal if using Linux/Mac or gitbash if using Windows and type in the following
+  
+```bash
+  ssh-keygen -t rsa -b 4096 -C "your_email@yale.edu"
+```
+  
+  It will take a second to create ssh-keys for you 
+  
+```bash
+ Generating public/private rsa key pair.
+```
+ Then it will ask where to save your keys. By default it saves in your home directory under 
+ the `.ssh` folder which is hidden by default since it start with a dot. You will need to be able to access the 
+ folder to copy in your public key to github. If you are unsure, keep the default. 
+ 
+```bash 
+Enter file in which to save the key (/home/user-name/.ssh/id_rsa): 
+```
 
-Git can be complex, but it does not have to be. This section introduces the basics to using git. 
-Having a good [choosing_text_editors.md##Git]([text editor) can make using git painless. 
+Next it will ask you to create a passphrase. I suggest entering a passphrase that is easy for you to 
+remember in that it gives an extra level of protection. 
 
-Once you have git installed you will need to make sure its configured with a username and password, these are used to sign
-changes to the code base. 
+### Start ssh agents 
+Next you will need to start the ssh agent and add your keys to it so your computer knows where to look for them. 
+``` bash
+ eval "$(ssh-agent -s)"
+```
 
-```Bash
-git config --global-user-name "my name"
-git config --global-user-email "my_email@yale.edu"
+which will return something like `> Agent pid 59566`
+
+Next add your keys to the ssh-agent by 
+
+```bash
+ssh-add  /Users/you/.ssh/id_rsa
+```
+
+### Share public key with GitHub 
+
+Open up your GitHub account , under your profile there is a setting button, click on that. 
+Go to the left hand side and got to the `SSH and GPG keys ` menu 
+
+![Navigating to ssh key](../assets/github-adding-public-sshkey.gif)
+
+Next go ahead and add the public key you [saved above in creating ssh keys](#create-ssh-keys-locally ) by 
+clicking on the green button.
+
+![Press green button  ](../assets/github-addsshkey-button.png)
+
+Next you will be prompted with 
+
+![Add public ssh key](../assets/github-add-public-key-button.png)
+
+
+### Test connection 
+
+Open up a terminal, if your in windows this would be a bash emulator or WSL which runs a linux virtualization within windows.
+
+`ssh -T git@github.com`
+
+
+## Example workflow example 
+
+
+Lets use the example repository in our group called [demo_project](https://github.com/DISSC-yale/demo)
+to work through and example workflow. 
+
+1. Create an issue and call out a team member 
+
+2. Clone the repository locally 
+
+3. Make changes to the local repository, commit locally 
+
+4. Pushing changes and ensuring you have the most upto date version.
+
+#### 1. Create an issue
+
+Create an issue and call out a team member 
+
+Create an issue in the  [demo_project](https://github.com/DISSC-yale/demo) repository. Note that 
+we have created some templates to try to make it easier to decide what should be an issue. In general, 
+information about a project or dataset that might be useful for future researchers to have access to are probably a good place to put the here 
+. ![Create an issue and call out a team member](../assets/github-demo-create-issue.gif)
+
+
+#### 2. Clone repo locally 
+
+Go to the  [demo_project](https://https://github.com/DISSC-yale/demo) repository and click on the clone button and copy the ssh code 
+![get clone string](../assets/cloning-a-repository.gif)
+
+Next on your local machine open up a terminal or command line and type in the folloiwng 
+
+```bash 
+git clone git@github.com:DISSC-yale/demo.git
+```
+This create a local clone of the git repository so you can make changes. 
+
+Note since we cloned it from github the origin remote is our github repo. 
+You can see this by typing 
+
+```bash 
+git remote -v 
+```
+And it prints out the remotes 
+
+```bash 
+origin	git@github.com:DISSC-yale/demo.git (fetch)
+origin	git@github.com:DISSC-yale/demo.git (push)
+```
+
+When we are pushing, pulling and fetching changes we will do this against the `origin` remote which is linked
+to github. Note the origin remote could be a forked version or even just another version of the code living in a different path.
+
+#### 3. Make changes locally 
+
+Lets go ahead and make a change to the demo repository. 
+
+ - [ ] Create a file in the repository and add some text to it
+ 
+ You can do this from a linux type terminal by doing the following 
+ 
+ ```bash 
+echo "This is a test by user1" >> newfile
+ ```
+
+And lets make another file 
+
+ ```bash 
+echo "This is a test by user1" >> makingchanges
+ ```
+
+#### 4. Update local git repository
+
+Once changes have been made there are two steps to adding them to the git repository. 
+
+You can check the status of your changes by typing in to the command line 
+```bash 
+git status
+```
+Which shows
+ ![status not staged](../assets/gitlocal-status-not-staged.png)
+ 
+ If you are using a full fledged text editor you can avoid the command line, for example here is what it looks like in vscode
+ and the changes show up automatically in the text editor and its very easy to see what has changed. 
+ ![vscode-status](../assets/vscode-git-status.png)
+
+ 
+#####  Prep-changes to be added (Stage)
+`Stageing`  has two functions, it allows you to easily checkpoint change you are making so you can track difference and it 
+allows you to group changes together so they can be ready to be commited. 
+
+We go ahead and stage changes by using an IDE or by using 
+
+```bash 
+git add makingchanges newfile 
+```
+
+Then by checking on `git status`
+
+ ![status not staged](../assets/gitlocal-status-staged.png)
+
+
+#####  Adding changes to repository (Commit)
+
+So we have our changes staged, next we add them to the repository. This is immutable, once a change is commited 
+it stays in the log. You are also prompted for message to the changes you are adding. 
+
+You should make things as concise as possible and focus on the **WHY** of the change, since its pretty easy to look at diffs. 
+If the change is addressing a bug  or an issue it worth adding a link to the commit about that as well. 
+
+Not you can add the message in the command line 
+```bash
+git commit -m "Testing out git functionality"
+```
+
+Or leave it out, in which case a text editor will open for you to make the change. The first line is often very concise and the body can be much longer if you want. If you have a long message its worth using `git commit`
+```bash
+git commit
 ```
 
 
-## Initializing a Git repository 
+#### 5. Update GitHub 
 
-As long as git is installed users initialize a repository by going to the folder and using the command `git init`. 
-For example here is what it looks like when you initialize a repo in the `whats_for_supper` project. 
-![git init](img/whats_for_supper_initialize_git.png "git init")
+#####  Send (push) local changes to Github 
 
-The entire repository lives inside of a `.git` files and that is all that is created for you. For the most part you do not need to make 
-changes within this file. 
+Now the local repository is out of sync with the repository hosted at GitHub. Local changes to need to be 
+sent or pushed in git terminology to github. 
 
-It is best practice to create a `.gitignore` file in the root directory of the project. This is simply a text file that tells git what to ignore. 
-For example, you may which to ask git to ignore changes made to log files or data files as is often best practice. 
+Pushing changes takes two parameter 
+   1. git remotes which are the  location of other copies of the repo. When you clone a repo from GitHub the default name is `origin` 
+   2. A branch so git know where to put our changes 
+   
+   The remote is pretty clear, its `origin` and can be checked with `git remote -v`. The branch is more flexible and in line with our
+   workflow, the main branch can not have any changes pushed to it. Each user will push there changes to branch of there choosing, 
+   in general it should be there name. 
+   
+   Locally we are working on the `main` branch by default and that can be checked by `git branch`.
+   
+   So we use the `git push` command and the remote we want to push it to, `origin` and a branch. If the branch does not exist
+   we use the following `main:maurice` which says send the `main` local branch to remote `maurice` branch 
+   
+   ```bash
+   git push origin main:origin/maurice
+   ```
 
-``` .gitignore 
-*.log
-*.dta
-*.csv
-*.lst 
-```
+All of this is made much easier by using an IDE like EMACS or Vscode. 
 
-## Adding changes to the repository 
+#####  Create a pull  request on GitHub 
+ 
+ Go to the GitHub reposotory and there should be a green blob at the top that says, you have a new branch. 
+ Do you want to create a pull request. Click on it. 
+ 
+ You are prompted to write a little about the pull request. Again focusing on the why or referencing relevent issues, emails or pr are worth while. 
+ 
+ Add a reviewer if you want someone to take a look. 
+ 
+ Create the pull request.
+ 
+ Once you create it there is the ability to add comments around the code. 
+ 
+Someone needs to accept the pull request before it gets merged in. If you want someone to take a look they will do that. if you are 
+just documenting changes you made, e.g. these are the changes for the conference. You can accept the change and merge it yourself. 
 
-Once a repository is initialized, the next step involves adding code to git. To understand this process all you need to know that git 
-will search your repository for changes made. When a change is made it shows up as `unstaged`. 
+![GitHub pull request](../assets/github-pull-request.gif)
+ 
+ 
+#### 6.  Get new GitHub change locally (fetch-pull)
 
-If you just started a new repository, git does not know what folders it should be looking at. To begin with you need to start out by 
-adding folders to the repository via `git add /folder/to/add`. Further, you should be sure that the `.gitignore` file is up to date since this will 
-save you the headache of unstaging files you do not want in your repository.
+If you are working with someone else or returning to a repository where many people are making changes. Its best to 
+make sure you have all of the most recent changes. 
 
-Generally, adding changes to your repository comes in to steps, there is a temporary step called `staging` where you move changes to, this maybe a useful way to group many changes into a series of single commits.
+`git fetch origin ` will get all changes on origin 
+`git pull origin main ` will pull all of the changes from origin on the main branch to the current branch. 
 
-Once you `stage` changes then you can push them to the repository with a `commit`. This takes a message and records all of the changes as well as hash based on the changes made so you can always go back to that process. 
-
-Git paradigm involves working in a repository 
-
-1. staging area (pre commit, can unstage)
-         
-2. commit areas (immutable)
-
-## Strategies for grouping commits into meaningful chunks of work 
-
-1. commits
-
-2. branches 
-
-3. Pull/Merge requests 
-
-### What are forks? 
-A fork is a copy of a repository, often place in your name space rather then the DISSC space for example. 
-Its useful in that it creates a complete sandbox of the repo for you to make and change you want with out worrying about how it might impact other users. 
-
-### What are branches? 
-
-Branches are copies of a codebase that is within the same repository but sitting in a separate branch then the main branch. 
-For example, there maybe a main branch in a repository and a separate branch for my work might be called `maurice` or specific update like 
-`prep_for_nber_si_presentation` may work but is within a single repository. These branches can more easily be observed since they all sit within the same repository. Note that forked repository can also be compared but we need to make sure we add the forked repository remote path to the repository. 
-
-### What is a Merge request ? 
-
-Git is decentralized in the sense that many different repositories may exist. In such a world how are changes shared? The idea of merge request involves merging code changes in a branch or fork of repository into another repository. This is often done in the sense when there is one main repository where everyone is pushing changes toward. 
-
-What if we are not collaborating across users or repositories?: Then Merge requests are still a useful tool in that it allows us to group changes to the code in a meaningful manner. Through the use of a webfront end like gitHub it also allows to easily look at all the changes made, add some text to give a high level over view of the spirit of the changes and call out individuals to review the code. 
-
-MR do not go away so they create institutional knowledge which connect key changes made to the code base and how they impact a research project. 
-
-So if multiple people are making changes to a single source of truth repository then how can we be sure that our local repositories are kept upto date? 
-This is where 
-
-#### Anatomy of a good merge request 
-
-### What is Fetch? 
-
-Remember git is decentralized, if you want to look at changes made in other branch or other forked repository you must first do a `git fetch` all of the other
-repositories you are "watching". In terms of git, "watching" means that you have created a `git remote` this tells git `
+- may cause some conflict 
+- git pull only brings things in from the last git fetch, so important to run git fetch so changes in the 
+ cloud are cached or flagged locally.
 
 
-# Git and GitHub
+# Using IDES 
 
-GitHub can be though of as a remote front end for using git. It makes collaboration and code review easier and has some nice built in project management features buiilt into it. 
+Using git is much easier if you use and IDE like vscode or emacs or local gui front end like gitKraken.
 
-## Connecting to GitHUB 
+For example this is what it looks like in emacs 
 
-1. We use ssh keys , put the public key into GitHub 
-https://www.atlassian.com/git/tutorials/git-ssh
-         
-## Working with decentralized version control systems 
-
-1. local version of a git repository has all of the history from where you cloned repository 
-2. git connects to other repositorys by adding a `remote` repository. This repo can live locally in another folder or can live in the cloud. 
-
-
-
-# Workflows
-
-To fork or to branch? These are really different paradigm to working on a project. For the purpose of this group we will be working of separate branches on the same hosted github repository. That way its easier to compare what people are working on. If you find that you are working off many different branches then its ok to fork. 
-
-Protecting a branch is a way of making sure that a branch remains a source of true, where code should be reviewed before being pushed and if possible should be working before being pushed. When a branch is protected, a typical way of pushing code is through creating merge requests (MRs)
-
-   !!! Do these work on dropbox? No if more then one person is making change. 
-      Unless you unsync the program folders. !!!
-
-## Single researcher
-
-![git init](img/gitflow-model_oneuser.src.png "Simple workflow")
-
-## Collabrative workflows 
-
-![git init](img/gitflow-model_collaborative_many-user.src.png "Collaporative many user")
-
-
-## Incrementing changes - working of diffs 
-
-Git provides a ways to roll back changes which is useful. The real power in git comes from being able to 
-track changes you have made since last comit or stage. Being able to work of differences or changes allows you to concentrate on what you have been changing. Its useful when projects get put down or if you have been strategic betwen 
-
-
-## Collaborating 
-
-- chat feature around pull requests
-- raising issues ; not always necessary. 
-
-# Best practices 
-
- - Too commit large or small changes ?
-  - Creating a branch?
-  - Do i need pull request 
-
-
-## Starting a new project 
-
-When starting a new project, create the project on GitHub making sure to use one of the templates. 
-
-
-If you want to bring a current project into gitHub, you can create a repo on GitHub and add the `remote` to the repository 
-via 
-
-`git add remote upsteam git@github.com:Yale-Health-Econ/doc_health.git`
-
-## Creating a new merge request 
-
-
- - test repository people can do whatever they want to without worrying with breaking anything 
-
- main 
-
-# Working through some examples 
-
-Ready to try out some example. [See the git onboarding section for setting up ssh key and some examples to try out](../onboarding/connecting_to_github.html)
+![Emacs magit](../assets/emacs-magit-showcase.gif)
 
 
 # Other resources 
 
-- https://skills.github.com/ ; go through and borrow and tune to the way we will work
-- https://raw.githack.com/uo-ec607/lectures/master/02-git/02-Git.html#1 : Great intro slides  
-- dropbox and git -- https://github.com/kbjarkefur/GitHubDropBox
-- https://github.com/worldbank/dime-github-trainings 
+- [Reading on some common git workflow](https://www.atlassian.com/git/tutorials/comparing-workflows)
+
+- [Overview of some common git syncing commands ](https://www.atlassian.com/git/tutorials/syncing)
+
+- [BitBucket is a GitHub competitor but has good documention](https://www.atlassian.com/git/tutorials/what-is-version-control)
+
+-  [More BitBucket reading on setting up a repo](https://www.atlassian.com/git/tutorials/setting-up-a-repository)
+  

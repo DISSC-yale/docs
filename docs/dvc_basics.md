@@ -1,4 +1,4 @@
-# Using DVC 
+# What is DVC? 
 
 Make sure you have installed it, go to the onboading section 
 

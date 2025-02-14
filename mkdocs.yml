@@ -115,9 +115,9 @@ markdown_extensions:
 nav:
   - Version Control:
       - accessing_yale_github_enterpise.md
+      - git_basics.md
       - using_git.md
-      - connecting_to_git.md
-      - using_dvc.md
       - dvc_basics.md
+      - using_dvc.md
   - High-Performance Computing:
       - hpc/ood.md

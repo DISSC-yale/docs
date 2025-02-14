@@ -1,5 +1,5 @@
 
-# Using Data Version Control (DVC)
+# DVC walkthrough 
 
 Our centralized data repository uses [Data Version Control](https://dvc.org/) and is built on top of git repositories for finding data 
 
