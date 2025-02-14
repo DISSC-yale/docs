@@ -12,9 +12,7 @@ This will focus on getting you up and runnignw with accessing data with DVC quic
 
 Dependencies 
   - If you have not worked through the [Using GitHub](connecting_to_git.md) walkthough and install you should start there
-  - make sure that we have access to [GitHub](https://github.com/DISSC-yale/demo) 
-  - make sure we have access to cooper linux server (email- Maurice for access)
-
+  
 Things to be aware of when using DVC
   - DVC ends up creating many copies of your data. 
     Important to keep in mind when working with large data. 
