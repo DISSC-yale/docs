@@ -6,10 +6,7 @@ See the **[documentation site](https://silver-adventure-kgqjzk5.pages.github.io/
 
 ## Access the Site
 
-The documentation site is hosted from a private Yale GitHub Enterprise repository, so there are 2 requirements to access it:
-
-1. You will need to be granted access to the repository. This should have already happened if you were given access to the data, but you may need to request access.
-2. You will need to [sign in](https://github.com/enterprises/yale/sso) to your Yale-managed GitHub account (which is created automatically).
+The documentation site is hosted from a Yale GitHub Enterprise repository, so you will need to [sign in](https://github.com/enterprises/yale/sso) to your Yale-managed GitHub account (which is created automatically).
 
 You can also sign in to your Yale-managed GitHub account from the usual GitHub login screen by typing `_yale` in the username field, then continuing to the Yale single sign-on provider:
 
