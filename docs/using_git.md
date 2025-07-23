@@ -328,3 +328,4 @@ For example this is what it looks like in emacs
 
 -  [More BitBucket reading on setting up a repo](https://www.atlassian.com/git/tutorials/setting-up-a-repository)
   
+- [Useful walkthrough](https://andersenlab.org/dry-guide/2022-03-09/github/)
