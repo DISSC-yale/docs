@@ -121,4 +121,4 @@ nav:
       - using_dvc.md
   - High-Performance Computing:
       - hpc/ood.md
-      - hpc/quick_start_milgram.md
+      - hpc/quick_start.md
