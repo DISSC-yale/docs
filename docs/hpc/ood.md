@@ -15,7 +15,7 @@ Parameters that relate to the hardware:
 
 - **Number of Hours**: How long you need the session to run. Start with a short duration for testing. It is good practice to stop your session when you are finished by clicking on `Cancel` in My Interactive Sessions.
 
-![Delete session](img/delete_session_milgram.png)
+![Delete session](./img/delete_session_milgram.png)
 
 - **CPU cores**: This will determine how many cores / threads you will be able to use, and, if memory is tied to cores, how much total memory you have available. For simple tasks, 1 or 2 CPUs is sufficient.
 - **Memory**: This will determine the amount of memory / RAM you will be able to use, which will be particularly relevant if you want to load in large portions of data into memory.

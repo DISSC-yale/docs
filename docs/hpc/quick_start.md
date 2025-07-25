@@ -58,7 +58,7 @@ From the OOD dashboard, you can launch an interactive session (e.g., Stata, RStu
 
 > **Note**: If you want to run Stata, check the Milgram Stata license to determine the maximum number of cores it can use.
 
-![RStudio OOD job parameters](img/rstudio_milgram_params.png)
+![RStudio OOD job parameters](./img/rstudio_milgram_params.png)
 
 ### Submitting Batch Jobs
 
