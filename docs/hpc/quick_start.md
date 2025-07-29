@@ -8,7 +8,7 @@ Please review the Yale Center for Research Computing (YCRC) [policies and best p
 
 If you do not already have a Yale Center for Research Computing (YCRC) HPC account, you can request one for the desired cluster by filling out the [account request form](https://research.computing.yale.edu/support/hpc/account-request). For example, you should specify the `Milgram` cluster if the data you data you want to access lives in Milgram. Once you complete the form, YCRC will reach out to you. Once an account is set up, DISSC staff can assist to granting access to datasets.
 
-## Requesting Data Access for Users
+## DISSC managed access controls
 
 To grant another user access to data stored on a cluster, follow these steps:
 
