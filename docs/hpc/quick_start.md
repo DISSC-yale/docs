@@ -10,6 +10,8 @@ If you do not already have a Yale Center for Research Computing (YCRC) HPC accou
 
 ## DISSC managed access controls
 
+For researchers who are working with DISSC to manage access controls this section refers to you. Please contact us if this is something your interested in and we can discuss options. 
+
 To grant another user access to data stored on a cluster, follow these steps:
 
 1.  Ensure the user has requested an account for the cluster containing the data with you listed as the PI on the [account request form](https://research.computing.yale.edu/support/hpc/account-request).
