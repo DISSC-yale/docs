@@ -1,8 +1,12 @@
-# YCRC cluster quick start with access controls
+# YCRC cluster quick start 
 
 This document outlines the process for setting up an account, accessing data, transferring files, and working on the Yale high-performance computing (HPC) clusters.
 
 Please review the Yale Center for Research Computing (YCRC) [policies and best practices](https://docs.ycrc.yale.edu/clusters-at-yale/access/accounts/).
+
+
+
+-
 
 ## Requesting a YCRC Account
 
@@ -10,7 +14,7 @@ If you do not already have a Yale Center for Research Computing (YCRC) HPC accou
 
 ## DISSC managed access controls
 
-For researchers who are working with DISSC to manage access controls this section refers to you. Please contact us if this is something your interested in and we can discuss options. 
+For researchers who are working with DISSC to manage access controls please reference this section. Please contact us if this is something your interested in and we can discuss options. 
 
 To grant another user access to data stored on a cluster, follow these steps:
 
@@ -19,7 +23,7 @@ To grant another user access to data stored on a cluster, follow these steps:
 3.  Email `dissc@yale.edu` with the following information:
     * User's first and last name.
     * User's NetID, if possible (it is not strictly necessary).
-    * The dataset you want to grant them access to and any relevant information associated with the request.
+    * The dataset and path you want to grant them access to and any relevant information associated with the request.
 4.  DISSC will provide access, apply the necessary Access Control Lists (ACLs), and log the request.
 
 ## Transferring Data to/from the Cluster
@@ -40,21 +44,36 @@ The easiest method for small files is to use the **File Transfer** feature direc
 
 > For assistance with any data transfer method, please reach out to DISSC at `dissc@yale.edu` or YCRC at `hpc@yale.edu`.
 
-## Working on Milgram with Open OnDemand (OOD)
+## Working at YCRC with with Open OnDemand (OOD)
 
-For an overview of the OOD portal, please see [here](https://dissc-yale.github.io/docs/hpc/ood.html).
+For an overview of the OOD portal, please see [here](https://dissc-yale.github.io/docs/hpc/ood.html). 
 
-Note, you will need to be signed into Yale’s VPN to access the portal.
+OOD allows you to work on different clusters using an easy to use front end accesible through a web browser. 
 
-**OOD Dashboard Link**: [https://ood-milgram.ycrc.yale.edu/pun/sys/dashboard/](https://ood-milgram.ycrc.yale.edu/pun/sys/dashboard/)
+> **Note:** You must be signed into Yale’s VPN to access the portal.
+
+It is important to note that YCRC uses SLURM to schedule both batch and interactive jobs. `Partition` in this context references the the clusters you can submit jobs to. These will set the limits on single node processing in terms of max mem or number of CPUs.
+
+### [Milgram OOD Dashboard Link:](https://ood-milgram.ycrc.yale.edu/pun/sys/dashboard/)
+
+-  [Milgram partitions](https://docs.ycrc.yale.edu/clusters/milgram/): provides an overview of resources available.
+-  [user portal](https://ood-milgram.ycrc.yale.edu/pun/sys/ycrc_userportal): Provides cluster usage, job status, and other useful information about your Grace account please review your.
+
+### [Grace OOD Dashboard Link:](https://ood-grace.ycrc.yale.edu/pun/sys/dashboard/)
+
+- See all [available partitions for Grace here](https://docs.ycrc.yale.edu/clusters/grace/).
+- [user portal](https://ood-grace.ycrc.yale.edu/pun/sys/ycrc_userportal): Provides cluster usage, job status, and other useful information about your Grace account please review your.
+
+Its important to note that different clusters may have different software modules and levels of memory and cpu/gpus accesible to them. 
 
 ### Starting an Interactive Session
 
+YCRC provides detailed documentataion, please refer to [interactive apps section for a walkthrough](https://docs.ycrc.yale.edu/clusters-at-yale/access/ood/#interactive-apps). 
 From the OOD dashboard, you can launch an interactive session (e.g., Stata, RStudio, or a general Linux Desktop).
 
 1.  Choose the type of instance you want to start.
 2.  Configure the session resources:
-    * **Partition**: See all [available partitions for Milgram here](https://docs.ycrc.yale.edu/clusters/milgram/).
+    * **Partition**: See all [available partitions for Milgram here for example](https://docs.ycrc.yale.edu/clusters/milgram/).
     * **Modules**: When you launch a specific application like `RStudio` or `Stata`, the required modules are loaded automatically. To use software from the generic remote desktop instance, you will need to load the modules manually. See [YCRC docs](https://docs.ycrc.yale.edu/applications/modules/) for more information on working with modules.
     * **Monitor Jobs**: To review your cluster usage, job status, and other useful information about your Milgram account please review your [user portal](https://ood-milgram.ycrc.yale.edu/pun/sys/ycrc_userportal/).
 
@@ -72,17 +91,3 @@ If you require more resources or need to run a non-interactive task, you can sub
 
 DISSC is developing simple shortcuts for launching applications like LibreOffice (for Word/Excel documents), RStudio, and Stata directly from the virtual desktop. We will work with you to set this up and update this documentation accordingly.
 
-## Working on Grace with Open OnDemand (OOD)
-
-Working on the Grace cluster is similar to working on Milgram (see section above) with some exceptions. 
-
-Note, you will need to be signed into Yale’s VPN to access the portal if you are working off-campus.
-
-**OOD Dashboard Link**: [https://ood-grace.ycrc.yale.edu/pun/sys/dashboard](https://ood-grace.ycrc.yale.edu/pun/sys/dashboard)
-
-### Interactive Sessions and Batch Jobs
-
-The process is similar to working in Milgram with a few notable exceptions:
-
-* See all [available partitions for Grace here](https://docs.ycrc.yale.edu/clusters/grace/).
-* To review your cluster usage, job status, and other useful information about your Grace account please review your [user portal](https://ood-grace.ycrc.yale.edu/pun/sys/ycrc_userportal).
