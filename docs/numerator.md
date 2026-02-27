@@ -1,6 +1,6 @@
 # Numerator
 
-Numerator data are stored on the [Grace cluster](https://docs.ycrc.yale.edu/clusters/grace/).
+Numerator data are stored on the [Bouchet cluster](https://docs.ycrc.yale.edu/clusters/bouchet/).
 
 See the **[documentation site](https://silver-adventure-kgqjzk5.pages.github.io/)** for more details and access instructions.
 
@@ -21,6 +21,6 @@ If you are not signed in to the appropriate GitHub account, you will get a 404 e
 
 The documentation site includes [instructions](https://silver-adventure-kgqjzk5.pages.github.io/#access-data) on accessing the Numerator data on the Grace cluster.
 
-You can also access the data through a [Globus collection](https://app.globus.org/file-manager?origin_id=bd63231e-1ee9-4b5a-ada7-652d9d8f8f47), if you want to work with the data in your own system.
+You can also access the data through a [Globus collection](https://app.globus.org/file-manager?origin_id=ad07aa8b-93e4-4a23-b24c-9a175d989e2c), if you want to work with the data in your own system.
 
 Access must be requested for each of these methods separately.
