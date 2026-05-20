@@ -122,3 +122,5 @@ nav:
   - High-Performance Computing:
       - hpc/ood.md
       - hpc/quick_start.md
+  - Using Data:
+      - data/parquet.md
