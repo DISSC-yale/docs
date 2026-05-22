@@ -5,7 +5,7 @@
 [Arrow](https://arrow.apache.org/docs/) is a platform that can be used to work with Parquet files across languages.
 
 Data in Parquet format may be a single file, such as `table.parquet`, but it is often spread across multiple files
-set within folders based on the values of a variable in the dataset:
+set within directories based on the values of variables in the dataset:
 
 ```console
 dataset/
@@ -16,13 +16,14 @@ dataset/
 ```
 
 When the data are partitioned in this way, you will generally point to the top level (here `dataset`),
-and whatever library you're using will handling working through the directory structures.
+and whatever library you're using will handling working through the directory structures
+(that is, you shouldn't need to navigate to a specific file, or manually loop over files).
 
 ## R
 
 In R, Arrow is integrated with dplyr, so the interface may be familiar.
 
-Single files are loaded in completely, so here `data` is a dplyr `tbl`:
+Single files are loaded in completely, so here `table` is a dplyr `tbl`:
 
 ```r
 table <- arrow::read_parquet("table.parquet")
@@ -34,7 +35,7 @@ Multiple files are not loaded immediately, so you can safely connect to very lar
 dataset <- arrow::open_dataset("dataset")
 ```
 
-From here, you can filter to a manageable subset, then call `dplyr::collect` to load the data:
+From here, you can filter to a manageable subset, then call `dplyr::collect()` to load the data:
 
 ```r
 subset <- dataset |> dplyr::filter(value == 1) |> dplyr::collect()
@@ -72,7 +73,7 @@ import pyarrow.compute
 subset = dataset.filter(pyarrow.compute.field("value") == 1).to_table()
 ```
 
-Arrow Tables can be converted to Pandas DataFrames with the `to_pandas` function:
+Arrow Tables can be converted to Pandas `DataFrames` with the `to_pandas` function:
 
 ```python
 table.to_pandas()
@@ -90,15 +91,18 @@ This can make working with bigger datasets much more efficient, and can interope
 The simplest way to use DuckDB if you're already using Arrow is the `to_duckdb()` function:
 
 ```r
-subset <- dataset |> arrow::to_duckdb() |> dplyr::filter(value == 1) |> dplyr::collect()
+subset <- dataset |>
+  arrow::to_duckdb() |>
+  dplyr::filter(value == 1) |>
+  dplyr::collect()
 ```
 
-You can also use DuckDB more directly:
+You can also use DuckDB more directly, and use SQL queries, if you prefer:
 
 ```r
 con <- DBI::dbConnect(duckdb::duckdb())
 
-subset <- DBI::dbdbGetQuery(
+subset <- DBI::dbGetQuery(
   con, "select * from read_parquet('dataset/**/*.parquet') where value == 1"
 )
 ```
